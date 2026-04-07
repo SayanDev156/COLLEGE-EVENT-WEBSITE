@@ -5,3 +5,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .DS_Store
+.vercel
+.env*.local
+SETUP_VERCEL_ENV.ps1
+SET_ENV_VARS.ps1
+phone-audit.json
