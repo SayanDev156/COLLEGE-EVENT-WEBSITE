@@ -264,41 +264,129 @@ app.post("/api/register", async (req, res) => {
     return res.status(400).json({ success: false, message: "You must accept terms and policy." });
   }
 
-  const duplicate = await Registration.findOne({
-    $or: [{ email }, { phone }]
-  });
-
-  if (duplicate) {
+  const existingByEmail = await Registration.findOne({ email }).select("_id").lean();
+  if (existingByEmail) {
     return res.status(409).json({
       success: false,
-      message: "You have already registered with this email or phone number."
+      message: "This email is already registered."
     });
   }
 
-  const registration = await Registration.create({
-    name,
-    email,
-    college,
-    phone,
-    eventType,
-    message,
-    termsAccepted
-  });
+  const existingByPhone = await Registration.findOne({ phone }).select("_id").lean();
+  if (existingByPhone) {
+    return res.status(409).json({
+      success: false,
+      message: "This phone number is already registered."
+    });
+  }
+
+  let registration;
 
   try {
-    await sendMail({
+    registration = await Registration.create({
+      name,
+      email,
+      college,
+      phone,
+      eventType,
+      message,
+      termsAccepted
+    });
+  } catch (error) {
+    if (error?.code === 11000) {
+      const duplicateField =
+        (error?.keyPattern && Object.keys(error.keyPattern)[0]) ||
+        (error?.keyValue && Object.keys(error.keyValue)[0]) ||
+        null;
+
+      if (duplicateField === "email") {
+        return res.status(409).json({
+          success: false,
+          message: "This email is already registered."
+        });
+      }
+
+      if (duplicateField === "phone") {
+        return res.status(409).json({
+          success: false,
+          message: "This phone number is already registered."
+        });
+      }
+
+      return res.status(409).json({
+        success: false,
+        message: "This registration already exists."
+      });
+    }
+
+    console.error("Registration create failed:", error.message);
+    return res.status(500).json({
+      success: false,
+      message: "Could not complete registration. Please try again."
+    });
+  }
+
+  let mailResult = {
+    status: "failed",
+    provider: null,
+    reason: "Email send not attempted."
+  };
+
+  try {
+    const result = await sendMail({
       to: email,
       subject: "CampusFest Registration Confirmation",
       html: registrationEmailTemplate(name, toTrackLabel(eventType))
     });
+
+    if (result?.skipped) {
+      mailResult = {
+        status: "skipped",
+        provider: result.provider || null,
+        reason: result.reason || "Email provider is not configured."
+      };
+
+      console.warn("Confirmation email skipped:", {
+        registrationId: registration._id.toString(),
+        email,
+        provider: mailResult.provider,
+        reason: mailResult.reason
+      });
+    } else {
+      mailResult = {
+        status: "sent",
+        provider: result?.provider || null,
+        reason: null
+      };
+
+      console.info("Confirmation email sent:", {
+        registrationId: registration._id.toString(),
+        email,
+        provider: mailResult.provider
+      });
+    }
   } catch (error) {
-    console.error("Confirmation email failed:", error.message);
+    mailResult = {
+      status: "failed",
+      provider: String(process.env.MAIL_PROVIDER || "smtp").toLowerCase(),
+      reason: error.message
+    };
+
+    console.error("Confirmation email failed:", {
+      registrationId: registration._id.toString(),
+      email,
+      provider: mailResult.provider,
+      reason: mailResult.reason
+    });
   }
 
   return res.status(201).json({
     success: true,
     message: "Registration successful.",
-    data: { id: registration._id }
+    data: {
+      id: registration._id,
+      mail: mailResult
+    }
   });
 });
 
