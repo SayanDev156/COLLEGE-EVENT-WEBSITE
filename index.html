@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="CampusFest 2026 - Professional college event platform with registration, live schedule, speakers, and student community engagement."
+    />
+    <meta name="keywords" content="college fest, campus event, student festival, registration, hackathon, culture" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CampusFest 2026 | College Event" />
+    <meta
+      property="og:description"
+      content="Join CampusFest 2026 for innovation challenges, cultural battles, esports, and networking."
+    />
+    <meta property="og:url" content="http://localhost:4000/" />
+    <meta property="og:image" content="http://localhost:4000/favicon.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CampusFest 2026 | College Event" />
+    <meta
+      name="twitter:description"
+      content="Register now for CampusFest 2026 and unlock high-impact student opportunities."
+    />
+    <meta name="twitter:image" content="http://localhost:4000/favicon.svg" />
+    <title>CampusFest 2026 | College Event</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#mainContent">Skip to main content</a>
+    <div class="announcement-bar" id="announcementBar" role="status" aria-live="polite"></div>
+    <div class="bg-orb orb-1" aria-hidden="true"></div>
+    <div class="bg-orb orb-2" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <header class="site-header" id="home">
+      <div class="container nav-wrap">
+        <a class="brand" href="#home">
+          <i class="bx bxs-graduation brand-icon"></i>
+          <span>CampusFest 2026</span>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu">
+          <i class="bx bx-menu"></i>
+        </button>
+
+        <nav id="mainNav" class="main-nav" aria-label="Primary">
+          <a href="#about">About</a>
+          <a href="#highlights">Highlights</a>
+          <a href="#schedule">Schedule</a>
+          <a href="#speakers">Speakers</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#register">Register</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <button class="btn btn-solid" id="heroRegisterBtn">Reserve Seat</button>
+      </div>
+    </header>
+
+    <main id="mainContent">
+      <section class="hero section reveal">
+        <div class="container hero-grid">
+          <div class="hero-text">
+            <p class="eyebrow">National Inter-College Innovation Festival</p>
+            <h1>Where Ideas, Talent and Campus Energy Meet</h1>
+            <p>
+              Join 3 unforgettable days of tech showcases, cultural performances,
+              startup demos, competitions, and networking with top mentors.
+            </p>
+            <div class="hero-cta">
+              <button class="btn btn-solid" id="joinNowBtn">Join CampusFest</button>
+              <a class="btn btn-outline" href="#schedule">Explore Schedule</a>
+            </div>
+            <div class="stats">
+              <div>
+                <h3>5K+</h3>
+                <p>Students</p>
+              </div>
+              <div>
+                <h3>40+</h3>
+                <p>Events</p>
+              </div>
+              <div>
+                <h3>60+</h3>
+                <p>Colleges</p>
+              </div>
+            </div>
+          </div>
+
+          <article class="event-card pulse" aria-label="Event details">
+            <h2>CampusFest 2026</h2>
+            <p><i class="bx bx-calendar"></i> 17 - 19 August 2026</p>
+            <p><i class="bx bx-map"></i> Central College Auditorium, Kolkata</p>
+            <p><i class="bx bx-time"></i> 9:00 AM - 8:30 PM</p>
+            <div class="countdown" id="countdown" aria-live="polite"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="about">
+        <div class="container about-grid">
+          <article class="glass-card">
+            <h2>About The Event</h2>
+            <p>
+              CampusFest is a student-first ecosystem built to celebrate innovation,
+              leadership, creativity, and collaboration. This year features AI &
+              robotics showcases, coding arenas, cultural battles, design sprints,
+              and startup pitch sessions.
+            </p>
+            <p>
+              Whether you are a developer, designer, entrepreneur, performer, or
+              enthusiast, there is a stage for you.
+            </p>
+          </article>
+
+          <div class="about-points">
+            <div class="point-card">
+              <i class="bx bx-bulb"></i>
+              <h3>Innovation Track</h3>
+              <p>Hackathons, prototype lab, and mentor-driven product clinics.</p>
+            </div>
+            <div class="point-card">
+              <i class="bx bx-music"></i>
+              <h3>Cultural Arena</h3>
+              <p>Battle of bands, street dance face-off, spoken word showcase.</p>
+            </div>
+            <div class="point-card">
+              <i class="bx bx-briefcase-alt-2"></i>
+              <h3>Career Zone</h3>
+              <p>Resume clinic, startup talks, and internship networking lounge.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="highlights">
+        <div class="container">
+          <div class="section-head">
+            <h2>Event Highlights</h2>
+            <p>Interactive and high-energy experiences curated for every student.</p>
+          </div>
+          <div class="highlight-grid" id="highlightGrid"></div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="schedule">
+        <div class="container">
+          <div class="section-head">
+            <h2>Program Schedule</h2>
+            <p>Click each day to view activities.</p>
+          </div>
+
+          <div class="day-switcher" id="daySwitcher">
+            <button class="day-btn active" data-day="day1">Day 1</button>
+            <button class="day-btn" data-day="day2">Day 2</button>
+            <button class="day-btn" data-day="day3">Day 3</button>
+          </div>
+
+          <div class="schedule-board" id="scheduleBoard">
+            <div class="schedule-day active" id="day1">
+            </div>
+            <div class="schedule-day" id="day2">
+            </div>
+            <div class="schedule-day" id="day3">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="speakers">
+        <div class="container">
+          <div class="section-head">
+            <h2>Featured Speakers</h2>
+            <p>Hover over cards for interactive spotlight effect.</p>
+          </div>
+
+          <div class="speaker-grid" id="speakerGrid"></div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="gallery">
+        <div class="container">
+          <div class="section-head">
+            <h2>Campus Moments</h2>
+            <p>Past event atmosphere and student energy.</p>
+          </div>
+          <div class="gallery-grid">
+            <figure class="gallery-item g1">
+              <img loading="lazy" src="/assets/gallery/hack-zone.svg" alt="Students collaborating during hackathon" />
+              <figcaption>Hack Zone</figcaption>
+            </figure>
+            <figure class="gallery-item g2">
+              <img loading="lazy" src="/assets/gallery/main-stage.svg" alt="Stage performance with crowd" />
+              <figcaption>Main Stage</figcaption>
+            </figure>
+            <figure class="gallery-item g3">
+              <img loading="lazy" src="/assets/gallery/design-arena.svg" alt="Design team working on laptops" />
+              <figcaption>Design Arena</figcaption>
+            </figure>
+            <figure class="gallery-item g4">
+              <img loading="lazy" src="/assets/gallery/esports-bay.svg" alt="Esports players competing live" />
+              <figcaption>Esports Bay</figcaption>
+            </figure>
+            <figure class="gallery-item g5">
+              <img loading="lazy" src="/assets/gallery/food-court.svg" alt="Food and snacks section at event" />
+              <figcaption>Food Court</figcaption>
+            </figure>
+            <figure class="gallery-item g6">
+              <img loading="lazy" src="/assets/gallery/awards-night.svg" alt="Award ceremony on stage" />
+              <figcaption>Awards Night</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="register">
+        <div class="container form-wrap">
+          <div>
+            <div class="section-head left">
+              <h2>Register Now</h2>
+              <p>Secure your seat and be part of the biggest college event.</p>
+            </div>
+            <ul class="register-list">
+              <li><i class="bx bx-check-circle"></i> Free entry for early registrations</li>
+              <li><i class="bx bx-check-circle"></i> Participation certificates</li>
+              <li><i class="bx bx-check-circle"></i> Prize pool and networking opportunities</li>
+            </ul>
+          </div>
+
+          <form id="registrationForm" novalidate>
+            <div class="field-row">
+              <div class="field">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Your full name" />
+                <small class="error-msg"></small>
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" />
+                <small class="error-msg"></small>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="college">College Name</label>
+                <input type="text" id="college" name="college" placeholder="Your college" />
+                <small class="error-msg"></small>
+              </div>
+              <div class="field">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" />
+                <small class="error-msg"></small>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="eventType">Preferred Track</label>
+              <select id="eventType" name="eventType">
+                <option value="">Select a track</option>
+                <option value="tech">Tech & Innovation</option>
+                <option value="cultural">Cultural Performances</option>
+                <option value="career">Career & Startup</option>
+                <option value="gaming">Esports</option>
+              </select>
+              <small class="error-msg"></small>
+            </div>
+
+            <div class="field">
+              <label for="message">Message (optional)</label>
+              <textarea id="message" name="message" rows="3" placeholder="Any note for organizers?"></textarea>
+            </div>
+
+            <div class="checkbox-wrap">
+              <input type="checkbox" id="terms" name="terms" />
+              <label for="terms">I agree to event rules and code of conduct, <a href="/terms" target="_blank" rel="noopener">terms</a>, and <a href="/privacy" target="_blank" rel="noopener">privacy policy</a>.</label>
+            </div>
+            <small class="error-msg checkbox-error"></small>
+
+            <button class="btn btn-solid full" type="submit">Submit Registration</button>
+            <p class="form-success" id="formSuccess" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="contact">
+      <div class="container footer-grid">
+        <div>
+          <h3>CampusFest 2026</h3>
+          <p>Building unforgettable college experiences through talent and innovation.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="#about">About</a>
+          <a href="#schedule">Schedule</a>
+          <a href="#register">Register</a>
+          <a href="/admin">Admin</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p><i class="bx bx-envelope"></i> events@campusfest.edu</p>
+          <p><i class="bx bx-phone"></i> +91 98765 43210</p>
+          <div class="socials">
+            <a href="#" aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="bx bxl-linkedin-square"></i></a>
+            <a href="#" aria-label="GitHub"><i class="bx bxl-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <p class="legal-links"><a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms & Conditions</a></p>
+      <p class="copyright">© <span id="year"></span> CampusFest Committee. All rights reserved.</p>
+    </footer>
+
+    <button class="back-top" id="backTop" aria-label="Back to top">
+      <i class="bx bx-up-arrow-alt"></i>
+    </button>
+
+    <div class="modal" id="infoModal" aria-hidden="true">
+      <div class="modal-content">
+        <button class="close-modal" id="closeModal" aria-label="Close modal">&times;</button>
+        <h3>CampusFest Update</h3>
+        <p id="modalText">Registration slots are filling quickly. Reserve your seat now.</p>
+        <a href="#register" class="btn btn-solid" id="modalRegister">Go to Registration</a>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

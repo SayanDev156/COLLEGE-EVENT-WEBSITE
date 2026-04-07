@@ -1,0 +1,15 @@
+{
+  "name": "CampusFest 2026",
+  "short_name": "CampusFest",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#071b2a",
+  "theme_color": "#071b2a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml"
+    }
+  ]
+}

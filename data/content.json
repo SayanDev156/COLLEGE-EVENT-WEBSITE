@@ -1,0 +1,71 @@
+{
+  "announcement": {
+    "enabled": true,
+    "message": "QA announcement updated at 20260407195108",
+    "type": "info"
+  },
+  "highlights": [
+    {
+      "icon": "bx-code-block",
+      "title": "24-Hour Code Sprint",
+      "description": "Team up and build impactful solutions on real-world challenges."
+    },
+    {
+      "icon": "bx-joystick",
+      "title": "Esports Championship",
+      "description": "Compete in university-level gaming tournaments and win prizes."
+    },
+    {
+      "icon": "bx-palette",
+      "title": "Creative Design Jam",
+      "description": "Rapid-fire design rounds judged by industry UI/UX professionals."
+    },
+    {
+      "icon": "bx-microphone",
+      "title": "Inspiring Keynotes",
+      "description": "Learn from founders, creators, and technology leaders."
+    }
+  ],
+  "schedule": {
+    "day1": [
+      "09:30 AM - Opening Ceremony & Welcome Address",
+      "11:00 AM - AI Innovation Expo",
+      "02:00 PM - Code Sprint Begins",
+      "06:30 PM - Cultural Night - Band Showcase"
+    ],
+    "day2": [
+      "09:00 AM - Startup Pitch Bootcamp",
+      "12:30 PM - Design Jam Live",
+      "03:00 PM - Esports Quarter Finals",
+      "07:00 PM - Open Mic & Talent Spotlight"
+    ],
+    "day3": [
+      "10:00 AM - Final Coding Presentations",
+      "01:00 PM - Founder Panel Discussion",
+      "04:00 PM - Awards and Closing Ceremony",
+      "05:30 PM - Networking Mixer"
+    ]
+  },
+  "speakers": [
+    {
+      "initials": "AR",
+      "name": "Arjun Roy",
+      "role": "AI Product Lead, Nova Labs"
+    },
+    {
+      "initials": "SP",
+      "name": "Sneha Pal",
+      "role": "Founder, Creatify Studio"
+    },
+    {
+      "initials": "DM",
+      "name": "Dev Mehra",
+      "role": "Principal Engineer, PixelStack"
+    },
+    {
+      "initials": "NT",
+      "name": "Niharika Tiwari",
+      "role": "Career Mentor & Startup Coach"
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusFest Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        font-family: "Manrope", sans-serif;
+      }
+      .admin-page {
+        width: min(1100px, 94vw);
+        margin: 36px auto;
+      }
+      .admin-card {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 16px;
+      }
+      .admin-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+      .stat-box {
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        padding: 14px;
+      }
+      .filters {
+        display: grid;
+        grid-template-columns: 1fr 220px auto;
+        gap: 10px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.92rem;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      }
+      .table-wrap {
+        overflow-x: auto;
+      }
+      .hidden {
+        display: none;
+      }
+      .top-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+      .admin-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      @media (max-width: 900px) {
+        .admin-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .filters {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="admin-page">
+      <section class="admin-card" id="loginCard">
+        <h1>Admin Login</h1>
+        <p>Sign in with role-based credentials to manage registrations and announcements.</p>
+        <form id="adminLoginForm" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="adminEmail">Email</label>
+              <input id="adminEmail" type="email" required />
+              <small class="error-msg"></small>
+            </div>
+            <div class="field">
+              <label for="adminPassword">Password</label>
+              <input id="adminPassword" type="password" required />
+              <small class="error-msg"></small>
+            </div>
+          </div>
+          <button class="btn btn-solid" type="submit">Login</button>
+          <p id="loginFeedback" class="form-success" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="admin-card hidden" id="dashboardCard">
+        <div class="top-row">
+          <div>
+            <h2>Dashboard</h2>
+            <p id="adminMeta"></p>
+          </div>
+          <div class="admin-actions">
+            <button class="btn btn-outline" id="refreshBtn" type="button">Refresh</button>
+            <button class="btn btn-outline" id="exportBtn" type="button">Export CSV</button>
+            <button class="btn btn-solid" id="logoutBtn" type="button">Logout</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="admin-card hidden" id="statsCard">
+        <h3>Registration Stats</h3>
+        <div class="admin-grid" id="statsGrid"></div>
+      </section>
+
+      <section class="admin-card hidden" id="announcementCard">
+        <h3>Announcement Bar</h3>
+        <form id="announcementForm">
+          <div class="field">
+            <label for="announcementMessage">Message</label>
+            <input id="announcementMessage" type="text" maxlength="180" />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="announcementType">Type</label>
+              <select id="announcementType">
+                <option value="info">Info</option>
+                <option value="warning">Warning</option>
+                <option value="success">Success</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="announcementEnabled">Enabled</label>
+              <select id="announcementEnabled">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-solid" type="submit">Update Announcement</button>
+          <p id="announcementFeedback" class="form-success" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="admin-card hidden" id="tableCard">
+        <h3>Registrations</h3>
+        <div class="filters">
+          <input id="searchInput" type="text" placeholder="Search by name, email, phone, college" />
+          <select id="trackFilter">
+            <option value="">All Tracks</option>
+            <option value="tech">Tech & Innovation</option>
+            <option value="cultural">Cultural</option>
+            <option value="career">Career & Startup</option>
+            <option value="gaming">Esports</option>
+          </select>
+          <button class="btn btn-outline" id="filterBtn" type="button">Apply</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>College</th>
+                <th>Phone</th>
+                <th>Track</th>
+                <th>Registered At</th>
+              </tr>
+            </thead>
+            <tbody id="registrationBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="admin.js"></script>
+  </body>
+</html>

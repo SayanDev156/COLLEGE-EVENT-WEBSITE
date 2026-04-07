@@ -1,0 +1,44 @@
+{
+  "name": "college-event-website",
+  "version": "1.0.0",
+  "description": "CampusFest professional website with backend APIs, admin dashboard, email notifications, and deployment workflows.",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "prebuild": "node -e \"require('fs').mkdirSync('dist',{recursive:true})\"",
+    "build": "npm run minify:js && npm run minify:css && npm run minify:html",
+    "minify:js": "terser script.js admin.js --compress --mangle --output dist/app.min.js",
+    "minify:css": "csso styles.css --output dist/styles.min.css",
+    "minify:html": "html-minifier-terser --collapse-whitespace --remove-comments --minify-css true --minify-js true -o dist/index.min.html index.html",
+    "lint": "echo \"No linter configured\""
+  },
+  "keywords": [
+    "college-event",
+    "node",
+    "mongodb",
+    "admin-dashboard"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "csv-stringify": "^6.5.2",
+    "dotenv": "^16.5.0",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.3.1",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.3",
+    "morgan": "^1.10.0",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.14"
+  },
+  "devDependencies": {
+    "csso-cli": "^4.0.2",
+    "html-minifier-terser": "^7.2.0",
+    "nodemon": "^3.1.4",
+    "terser": "^5.31.1"
+  }
+}
