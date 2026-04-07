@@ -392,6 +392,10 @@ app.get("/api/admin/stats", requireAuth, requireRole("admin", "editor"), async (
   return res.json({ success: true, data: { total, tracks: grouped } });
 });
 
+app.get("/", (_req, res) => {
+  res.sendFile(path.join(ROOT_DIR, "index.html"));
+});
+
 app.get("/admin", (_req, res) => {
   res.sendFile(path.join(ROOT_DIR, "admin.html"));
 });
