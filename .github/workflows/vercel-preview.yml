@@ -5,6 +5,7 @@ on:
 
 jobs:
   deploy-preview:
+    if: ${{ secrets.VERCEL_TOKEN != '' && secrets.VERCEL_ORG_ID != '' && secrets.VERCEL_PROJECT_ID != '' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,4 +29,3 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: "--prebuilt"
