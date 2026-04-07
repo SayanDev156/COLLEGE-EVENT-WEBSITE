@@ -23,6 +23,11 @@ const PORT = Number(process.env.PORT || 4000);
 const ROOT_DIR = __dirname;
 const CONTENT_FILE = path.join(ROOT_DIR, "data", "content.json");
 const EVENT_START_AT = new Date(process.env.EVENT_START_AT || "2026-08-17T09:00:00+05:30");
+const IS_VERCEL = Boolean(process.env.VERCEL);
+
+let initPromise = null;
+let adminSeeded = false;
+let cronStarted = false;
 
 app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(cors());
@@ -103,6 +108,45 @@ async function ensureAdminSeed() {
   });
 }
 
+async function connectToDatabase() {
+  if (!process.env.MONGODB_URI) {
+    throw new Error("MONGODB_URI is required in environment variables.");
+  }
+
+  if (mongoose.connection.readyState === 1) {
+    return;
+  }
+
+  if (!initPromise) {
+    initPromise = mongoose.connect(process.env.MONGODB_URI).finally(() => {
+      initPromise = null;
+    });
+  }
+
+  await initPromise;
+}
+
+async function initializeApp() {
+  if (!process.env.JWT_SECRET) {
+    throw new Error("JWT_SECRET is required in environment variables.");
+  }
+
+  await connectToDatabase();
+
+  if (!adminSeeded) {
+    await ensureAdminSeed();
+    adminSeeded = true;
+  }
+
+  if (!IS_VERCEL && !cronStarted) {
+    cron.schedule("0 * * * *", async () => {
+      await sendReminderMails();
+    });
+
+    cronStarted = true;
+  }
+}
+
 async function sendReminderMails() {
   const now = new Date();
   const diffMs = EVENT_START_AT.getTime() - now.getTime();
@@ -133,6 +177,19 @@ async function sendReminderMails() {
 
 app.get("/api/health", (_req, res) => {
   res.json({ success: true, message: "Server is healthy." });
+});
+
+app.use("/api", async (_req, res, next) => {
+  try {
+    await initializeApp();
+    next();
+  } catch (error) {
+    console.error("Initialization failed:", error.message);
+    res.status(500).json({
+      success: false,
+      message: "Server initialization failed. Check environment configuration."
+    });
+  }
 });
 
 app.get("/api/content", async (_req, res) => {
@@ -363,24 +420,16 @@ app.use((err, _req, res, _next) => {
   });
 });
 
-async function bootstrap() {
-  if (!process.env.MONGODB_URI || !process.env.JWT_SECRET) {
-    throw new Error("MONGODB_URI and JWT_SECRET are required in environment variables.");
-  }
-
-  await mongoose.connect(process.env.MONGODB_URI);
-  await ensureAdminSeed();
-
-  cron.schedule("0 * * * *", async () => {
-    await sendReminderMails();
-  });
-
-  app.listen(PORT, () => {
-    console.log(`CampusFest server running on http://localhost:${PORT}`);
-  });
+if (!IS_VERCEL) {
+  initializeApp()
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`CampusFest server running on http://localhost:${PORT}`);
+      });
+    })
+    .catch((error) => {
+      console.error("Failed to start server:", error.message);
+    });
 }
 
-bootstrap().catch((error) => {
-  console.error("Failed to start server:", error.message);
-  process.exit(1);
-});
+module.exports = app;
