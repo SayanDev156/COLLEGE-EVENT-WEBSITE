@@ -414,11 +414,24 @@ app.get("/terms", (_req, res) => {
 
 app.use((err, _req, res, _next) => {
   console.error(err);
+  const message = String(err?.message || "");
 
   if (err?.code === 11000) {
     return res.status(409).json({
       success: false,
       message: "Duplicate registration found. Use another email or phone number."
+    });
+  }
+
+  if (
+    /not authorized|authentication failed|buffering timed out|server selection timed out|econnrefused|enotfound|network/i.test(
+      message
+    )
+  ) {
+    return res.status(503).json({
+      success: false,
+      message:
+        "Database operation failed. Verify Vercel MONGODB_URI and MongoDB Atlas network access (allow 0.0.0.0/0)."
     });
   }
 
