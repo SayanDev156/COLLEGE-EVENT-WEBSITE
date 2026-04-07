@@ -127,10 +127,6 @@ async function connectToDatabase() {
 }
 
 async function initializeApp() {
-  if (!process.env.JWT_SECRET) {
-    throw new Error("JWT_SECRET is required in environment variables.");
-  }
-
   await connectToDatabase();
 
   if (!adminSeeded) {
@@ -180,6 +176,14 @@ app.get("/api/health", (_req, res) => {
 });
 
 app.use("/api", async (_req, res, next) => {
+  const path = _req.path || "";
+  const needsDatabase =
+    path === "/register" || path === "/auth/login" || path.startsWith("/admin");
+
+  if (!needsDatabase) {
+    return next();
+  }
+
   try {
     await initializeApp();
     next();
@@ -187,7 +191,7 @@ app.use("/api", async (_req, res, next) => {
     console.error("Initialization failed:", error.message);
     res.status(500).json({
       success: false,
-      message: "Server initialization failed. Check environment configuration."
+      message: `Server initialization failed: ${error.message}`
     });
   }
 });
