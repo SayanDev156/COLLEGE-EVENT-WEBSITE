@@ -286,8 +286,16 @@ form.addEventListener("submit", async (event) => {
       return;
     }
 
-    formSuccess.textContent = "Registration submitted successfully. Check your email for confirmation.";
-    formSuccess.style.color = "#27d3af";
+    const mailStatus = data?.data?.mail?.status;
+    if (mailStatus === "sent") {
+      formSuccess.textContent = "Registration submitted successfully. Confirmation email sent.";
+      formSuccess.style.color = "#27d3af";
+    } else {
+      formSuccess.textContent =
+        "Registration submitted successfully, but confirmation email is delayed. Please check spam/promotions or contact support.";
+      formSuccess.style.color = "#ffbf69";
+    }
+
     form.reset();
   } catch (_error) {
     formSuccess.textContent = "Could not submit right now. Please try again in a moment.";
